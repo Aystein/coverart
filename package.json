@@ -2,6 +2,7 @@
   "name": "pse-vanilla",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://aystein.github.io/coverart",
   "dependencies": {
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
@@ -29,7 +30,9 @@
     "start": "NODE_OPTIONS=--max-old-space-size=8192 react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "NODE_OPTIONS=--max-old-space-size=8192 npm run build",
+    "deploy": "NODE_OPTIONS=--max-old-space-size=8192 gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
