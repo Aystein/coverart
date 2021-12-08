@@ -1,10 +1,10 @@
-import React, { Ref, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { API, Application, DatasetType, IVector, PluginRegistry, PSEContextProvider, PSEPlugin, rootReducer, RootState, setDatasetEntriesAction, CSVLoader, Dataset, RootActions, createRootReducer } from 'projection-space-explorer';
+import { API, Application, DatasetType, IVector, PluginRegistry, PSEContextProvider, PSEPlugin, RootState, createRootReducer, PSELayer } from 'projection-space-explorer';
 import * as THREE from 'three'
 import { GLHeatmap } from './GLHeatmap';
-import { List, ListItem } from '@mui/material';
+import { Button, List, ListItem } from '@mui/material';
 import { SoundPrint } from './SoundPrint';
 
 
@@ -36,22 +36,39 @@ class SoundPlugin extends PSEPlugin {
 
 PluginRegistry.getInstance().registerPlugin(new SoundPlugin())
 
+const api = //@ts-ignore
+new API<RootState>(null, createRootReducer({}))
 
 
+function FrontLayer() {
+  return <PSELayer>
+    <Button style={{ pointerEvents: 'all' }} onClick={() => {
+      api.generateImage(1024, 1024, 64)
+    }}>
+      save
+    </Button>
+  </PSELayer>
+}
 
 export function CIMEApp() {
-  const api = //@ts-ignore
-    new API<RootState>(null, createRootReducer({}))
 
   const [context] = useState(
     api
   );
 
-
+  
 
   return (
     <PSEContextProvider context={context}>
       <Application
+      overrideComponents={{
+        layers: [
+          {
+            order: 1,
+            component: <FrontLayer></FrontLayer>
+          }
+        ]
+      }}
       />
     </PSEContextProvider>
   );

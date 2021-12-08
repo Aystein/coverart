@@ -31,7 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "NODE_OPTIONS=--max-old-space-size=8192 npm run build",
+    "predeploy": "NODE_OPTIONS=--max-old-space-size=8192 react-app-rewired build",
     "deploy": "NODE_OPTIONS=--max-old-space-size=8192 gh-pages -d build"
   },
   "eslintConfig": {
@@ -54,8 +54,8 @@
   },
   "devDependencies": {
     "@types/three": "^0.134.0",
-    "react-app-rewired": "^2.1.8",
     "copyfiles": "^2.4.1",
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^3.2.3",
+    "react-app-rewired": "^2.1.8"
   }
 }
