@@ -30,6 +30,7 @@ type Props = PropsFromRedux & {
 export const SoundPrint = connector(({ vectors, aggregate, hover, setHover }: Props) => {
     const ref = useRef<HTMLAudioElement[]>([])
 
+    
 
     if (vectors?.length) {
         const onMouseOver = (i: number) => {
