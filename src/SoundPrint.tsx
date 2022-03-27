@@ -35,12 +35,10 @@ export const SoundPrint = connector(({ vectors, aggregate, hover, setHover }: Pr
     if (vectors?.length) {
         const onMouseOver = (i: number) => {
             setHover(vectors[i])
-            ref.current[i].play()
         }
 
         const onMouseLeave = (i: number) => {
             setHover(null)
-            ref.current[i].pause()
         }
 
         return <List sx={{
@@ -57,7 +55,7 @@ export const SoundPrint = connector(({ vectors, aggregate, hover, setHover }: Pr
             {
                 vectors.map((vec, i) => {
                     return <ListItem onMouseLeave={() => onMouseLeave(i)} onMouseOver={() => onMouseOver(i)} key={vec.__meta__.meshIndex}>
-                        <audio ref={el => ref.current[i] = el!} controls autoPlay={!aggregate}>
+                        <audio ref={el => ref.current[i] = el!} controls autoPlay={false}>
                             <source src={`data:audio/wav;base64,${(vec as any)['wav']}`} />
                         </audio>
                     </ListItem>
